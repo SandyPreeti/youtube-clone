@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Navbar.css';
 import Logo from "./logo.png";
 import SearchBar from '../SearchBar/SearchBar';
@@ -6,15 +6,38 @@ import {RiVideoAddLine} from 'react-icons/ri';
 import{IoMdNotificationsOutline} from 'react-icons/io';
 import {BiUserCircle} from 'react-icons/bi';
 import {Link} from 'react-router-dom';
+import {GoogleLogin} from 'react-google-login';
+import {gapi} from 'gapi-script';
+import {useDispatch} from 'react-redux';
+import { login } from '../../action';
 
 function Navbar({toggleDrawer}) {
-    // const CurrentUser=null;
-    const CurrentUser= {
-        result:{
-            email:"preeti123@BiLogoGmail.com",
-            joinedOn:"2222-07-15T09:57:23.4897"
-        },
-    }
+    const CurrentUser=null;
+    // const CurrentUser= {
+    //     result:{
+    //         email:"preeti123@BiLogoGmail.com",
+    //         joinedOn:"2222-07-15T09:57:23.4897"
+    //     },
+    // }
+    useEffect(()=>{
+        function start(){
+            gapi.client.init({
+                clientId:"94564221489-h66jc6iumnjs2l3gn3mb5701sg8l098c.apps.googleusercontent.com",
+                scope:"email"
+            })
+        }
+        gapi.load("client:auth2",start)
+    },[])
+const dispatch=useDispatch()
+     const onSuccess=(response)=>{
+        const Email=response?.profileObj.email
+        console.log(Email)
+        dispatch(login({email:Email}))
+     }
+
+     const onFailure=(response)=>{
+        console.log('Failed',response);
+     }
   return (
     <div className='Container_Navbar'>
     <div className='Burger_Logo_Navbar'>
@@ -60,7 +83,14 @@ function Navbar({toggleDrawer}) {
             </div>
             
             </>):(<>
+            <GoogleLogin
+            clientId={"94564221489-h66jc6iumnjs2l3gn3mb5701sg8l098c.apps.googleusercontent.com"}
+            onSuccess={onSuccess}
+            onFailure={onFailure}
             
+            />
+
+
             <p className="Auth_btn">
             <BiUserCircle size={22}/>
             <b>Sign in</b>
