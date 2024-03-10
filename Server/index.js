@@ -1,10 +1,17 @@
 import express from  "express";
 import mongoose from "mongoose";
-// import dontenv  from 'dotenv '
+import dontenv  from 'dotenv';
 import userRoutes from './routes/user.js';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
 const app= express()
-// dontenv.config()
+dontenv.config()
+
+
+app.use(cors())
+
+app.use(bodyParser.json())
 app.get('/',(req,res)=>{
     res.send("hello")
 })

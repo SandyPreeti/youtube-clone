@@ -8,17 +8,20 @@ import {BiUserCircle} from 'react-icons/bi';
 import {Link} from 'react-router-dom';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { login } from '../../action';
 
 function Navbar({toggleDrawer}) {
-    const CurrentUser=null;
+    // const CurrentUser=null;
     // const CurrentUser= {
     //     result:{
     //         email:"preeti123@BiLogoGmail.com",
     //         joinedOn:"2222-07-15T09:57:23.4897"
     //     },
     // }
+    const CurrentUser=useSelector(state=>state.currentUSerReducer)
+    console.log()
+
     useEffect(()=>{
         function start(){
             gapi.client.init({
@@ -88,14 +91,13 @@ const dispatch=useDispatch()
             onSuccess={onSuccess}
             onFailure={onFailure}
             
-            />
-
-
-            <p className="Auth_btn">
-            <BiUserCircle size={22}/>
+            render={(renderProps)=>(
+                <p onClick={renderProps.onClick} className="Auth_btn">
+            <BiUserCircle  size={22}/>
             <b>Sign in</b>
-        </p>
-            
+        </p>)
+            }
+            />
             </>)
         }
        
