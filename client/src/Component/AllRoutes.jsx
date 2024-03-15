@@ -7,8 +7,9 @@ import LikedVideo from '../Pages/LikedVideo/LikedVideo';
 import WatchLater from '../Pages/WatchLater/WatchLater';
 import YourVideos from '../Pages/Your videos/YourVideos';
 import VideoPage from '../Pages/VideoPage/VideoPage';
+import Chanel from '../Pages/Chanel/Chanel';
 
-function AllRoutes() {
+function AllRoutes({setEditCreateChanelBtn,setVidUploadPage} ) {
   return (
   <Routes>
     <Route path='/' element={<Home/>}/>
@@ -18,6 +19,10 @@ function AllRoutes() {
     <Route path='/watchlater' element={<WatchLater/>}/>
     <Route path='/yourvideo' element={<YourVideos/>}/>
     <Route path='/videopage/:vid' element={<VideoPage/>}/>
+    <Route path='/chanelpage/:Cid' element={<Chanel 
+setEditCreateChanelBtn={setEditCreateChanelBtn}
+setVidUploadPage={setVidUploadPage}/>}/>
+
 
 
 

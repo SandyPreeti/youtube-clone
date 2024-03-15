@@ -9,7 +9,7 @@ export const login =async(req,res)=>{
             try {
                 const newUser = await users.create({email});
                 const token=jwt.sign({
-                    email:newUser.email,id:newUser._id
+                    email:newUser.email, id:newUser._id
                 },process.env.JWT_SECRET,{
                     expiresIn:"1h"
                 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Navbar.css';
 import Logo from "./logo.png";
 import SearchBar from '../SearchBar/SearchBar';
@@ -9,9 +9,12 @@ import {Link} from 'react-router-dom';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from 'gapi-script';
 import {useDispatch, useSelector} from 'react-redux';
-import { login } from '../../action';
+import { login } from '../../action/auth';
+import Auth from '../../Pages/Auth/Auth';
 
-function Navbar({toggleDrawer}) {
+function Navbar({toggleDrawer,setEditCreateChanelBtn}) {
+
+    const [authBtn,setAuthBtn]= useState(false)
     // const CurrentUser=null;
     // const CurrentUser= {
     //     result:{
@@ -19,7 +22,7 @@ function Navbar({toggleDrawer}) {
     //         joinedOn:"2222-07-15T09:57:23.4897"
     //     },
     // }
-    const CurrentUser=useSelector(state=>state.currentUSerReducer)
+    const CurrentUser=useSelector(state=>state.currentUserReducer)
     console.log()
 
     useEffect(()=>{
@@ -42,6 +45,7 @@ const dispatch=useDispatch()
         console.log('Failed',response);
      }
   return (
+    <>
     <div className='Container_Navbar'>
     <div className='Burger_Logo_Navbar'>
         <div className='burger' onClick={()=>toggleDrawer()}>
@@ -73,7 +77,7 @@ const dispatch=useDispatch()
     <div className="Auth_cont_Navbar">
         {
             CurrentUser?(<>
-            <div className="Chanel_logo_app">
+            <div className="Chanel_logo_app" onClick={()=>setAuthBtn(true)}>
                 <p className="fstChar_logo_app">
                     {
                         CurrentUser?.result.name ?(
@@ -104,6 +108,14 @@ const dispatch=useDispatch()
     </div>
 
     </div>
+    {   authBtn &&
+        <Auth
+        setEditCreateChanelBtn={setEditCreateChanelBtn}
+        setAuthBtn={setAuthBtn}
+        User={CurrentUser}
+        />
+    }
+    </>
   )
 }
 
