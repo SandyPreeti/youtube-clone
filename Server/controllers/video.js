@@ -14,7 +14,7 @@ export const uploadVideo=async(req,res,next)=>{
             videoChanel: req.body.chanel,
             Uploder: req.body.Uploder,
         });
-        console.log(file);
+        // console.log(file);
         await file.save();
         res.status(201).send("file Uploded Successfully")
     } catch (error) {

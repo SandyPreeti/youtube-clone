@@ -1,18 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import vids from "../../Component/Video/video.mp4";
 import "./VideoPage.css";
 import LikeWatchLaterSaveBtns from "./LikeWatchLaterSaveBtns";
 import Comments from "../../Component/Comments/Comments";
 import { Link, useParams } from "react-router-dom";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { addToHistory } from "../../action/History";
+import { viewVideo } from "../../action/video";
 function VideoPage() {
   const { vid } = useParams();
 
   const vids = useSelector((state) => state.videoReducer);
   const vv = vids?.data.filter((q) => q._id === vid)[0];
+  const dispatch = useDispatch();
+
   // const chanels=useSelector(state=>state?.chanelReducers)
   // const currentChanel=chanels.filter(c=>c._id===Cid)[0];
+  const CurrentUser = useSelector((state) => state?.currentUserReducer);
+  const handleHistory=()=>{
+    dispatch(
+      addToHistory({
+        videoId:vid,
+        Viewer:CurrentUser?.result._id
+      })
+    )
+  };
+  const handleViews=()=>{
+     dispatch(viewVideo({
+      id:vid
+     }))
+  }
+   useEffect(() => {
+    if(CurrentUser){
+      handleHistory();
+    }
+    handleViews()
+   },[]);
   return (
     <>
       <div className="container_videoPage">
@@ -32,7 +56,7 @@ function VideoPage() {
                     {vv.Views} views <div className="dot"></div>{" "}
                     {moment(vv?.createdAt).fromNow()}
                   </div>
-                  <LikeWatchLaterSaveBtns />
+                  <LikeWatchLaterSaveBtns  vv={vv} vid={vid}/>
                 </div>
               </div>
               <Link to={`/chanelpage/${vv?.videoChanel}`} className="chanel_details_videoPage">
@@ -45,7 +69,7 @@ function VideoPage() {
                 <h2>
                   <u>Comments</u>
                 </h2>
-                <Comments />
+                <Comments  videoId={vv._id}/>
               </div>
             </div>
           </div>

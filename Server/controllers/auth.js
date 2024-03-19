@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import users from '../models/auth.js'
 export const login =async(req,res)=>{
     const {email}=req.body;
-    console.log(email);
+    // console.log(email);
     try{
         const existingUser=await users.findOne({email});
         if(!existingUser){

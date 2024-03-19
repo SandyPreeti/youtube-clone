@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dontenv  from 'dotenv';
 import userRoutes from './routes/user.js';
 import videoRoutes from './routes/video.js';
+import commentsRoutes from './routes/comments.js';
+
 
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -23,6 +25,8 @@ app.get('/',(req,res)=>{
 })
 app.use('/user',userRoutes)
 app.use('/video',videoRoutes)
+app.use('/comment',commentsRoutes)
+
 
 const PORT= 5500;
 const DB_URL="mongodb+srv://preetipatidar865:SandyP02@cluster0.x8vh0zk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"

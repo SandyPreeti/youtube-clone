@@ -1,20 +1,30 @@
-import React from 'react'
-import ShowVideoList from '../ShowVideoList/ShowVideoList'
+import React from "react";
+import ShowVideoList from "../ShowVideoList/ShowVideoList";
 
-function WHLVideoList({page, videoList}) {
+function WHLVideoList({ page, CurrentUser, videoList }) {
+  console.log(CurrentUser)
   return (
-  <>
-  {
-    videoList.map(m=>{
-        return(
-            <>
-            <ShowVideoList videoId={m._id} key={m._id}/>
-            </>
-        )
-    })
-  }
-  </>
-  )
+    <>
+      {CurrentUser ? (
+        <>
+          {videoList?.data
+            ?.filter(q => q?.Viewer === CurrentUser)
+            .reverse()
+            .map(m => {
+              return (
+                <>
+                  <ShowVideoList videoId={m?.videoId} key={m?._id} />
+                </>
+              );
+            })}
+        </>
+      ) : (
+        <>
+          <h2 style={{ color: "white" }}> Plz Login To Watch Your {page}</h2>
+        </>
+      )}
+    </>
+  );
 }
 
-export default WHLVideoList
+export default WHLVideoList;

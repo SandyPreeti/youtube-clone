@@ -9,6 +9,9 @@ import { fetchAllChanel } from './action/chanelUser';
 import {useDispatch} from 'react-redux';
 import VideoUpload from './Pages/VideoUpload/VideoUpload';
 import { getAllVideos } from './action/video';
+import { getAlllikedVideos } from './action/likedVideo';
+import { getAllwatchLater } from './action/watchLater';
+import { getAllHistory } from './action/History';
 function App() {
 
 
@@ -18,6 +21,10 @@ function App() {
 useEffect(()=>{
   dispatch(fetchAllChanel());
   dispatch(getAllVideos());
+  dispatch(getAlllikedVideos());
+  dispatch(getAllwatchLater());
+  dispatch(getAllHistory())
+  
 
 },[dispatch])
 

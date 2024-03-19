@@ -8,6 +8,7 @@ import WatchLater from '../Pages/WatchLater/WatchLater';
 import YourVideos from '../Pages/Your videos/YourVideos';
 import VideoPage from '../Pages/VideoPage/VideoPage';
 import Chanel from '../Pages/Chanel/Chanel';
+import Search from '../Pages/Search/Search';
 
 function AllRoutes({setEditCreateChanelBtn,setVidUploadPage} ) {
   return (
@@ -19,6 +20,8 @@ function AllRoutes({setEditCreateChanelBtn,setVidUploadPage} ) {
     <Route path='/watchlater' element={<WatchLater/>}/>
     <Route path='/yourvideo' element={<YourVideos/>}/>
     <Route path='/videopage/:vid' element={<VideoPage/>}/>
+    <Route path='/search/:searchQuery' element={<Search/>}/>
+
     <Route path='/chanelpage/:Cid' element={<Chanel 
 setEditCreateChanelBtn={setEditCreateChanelBtn}
 setVidUploadPage={setVidUploadPage}/>}/>

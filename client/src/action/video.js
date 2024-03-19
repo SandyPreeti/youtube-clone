@@ -4,6 +4,7 @@ export const uploadVideo=(videoData)=>async(dispatch)=>{
        try {const {fileData,fileOptions}=videoData;
        const {data} = await api.uploadVideo(fileData,fileOptions);
        dispatch({type:'POST_VIDEO',data})
+       dispatch(getAllVideos())
 }
        catch(error){
         alert(error.response.data.message)
@@ -18,4 +19,27 @@ export const getAllVideos=()=>async(dispatch)=>{
           } catch (error) {
               console.log(error)
           }
+};
+
+export const likeVideo=(LikeData)=>async(dispatch)=>{
+             try {
+              const {id,Like} =LikeData;
+              const {data}=await api.likeVideo(id,Like);
+              dispatch({type:"POST_LIKE",payload:data})
+              dispatch(getAllVideos())
+              
+             } catch (error) {
+              console.log(error)
+             }
+};
+
+export const viewVideo=(ViewData)=>async(dispatch)=>{
+       try {
+              const {id}=ViewData;
+              const{data}=await api.viewsVideo(id)
+              dispatch({type:'POST_VIEWS',data})
+              dispatch(getAllVideos())
+       } catch (error) {
+              console.log(error)
+       }
 }

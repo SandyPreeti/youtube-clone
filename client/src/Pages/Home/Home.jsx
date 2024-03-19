@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux'
 import './Home.css';
 function Home() {
 
-  const vids=useSelector(state=>state.videoReducer)?.data;
+  const vids= useSelector(state=>state.videoReducer)?.data?.filter(q=>q).reverse();
 //   const vids=[{
 //     _id:1,
 //     video_src:vid,

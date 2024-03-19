@@ -3,7 +3,7 @@ import "./ShowVideo.css";
 import { Link } from "react-router-dom";
 import moment from 'moment';
 function ShowVideo({ vid }) {
-  console.log(vid)
+  // console.log(vid)
   return (
     <>
       <Link to={`/videopage/${vid?._id}`}>

@@ -2,47 +2,53 @@ import React from 'react';
 import{FaHistory} from 'react-icons/fa';
 import LeftSidebar from '../../Component/LeftSidebar/LeftSidebar';
 import WHLVideoList from '../../Component/WHL/WHLVideoList';
-import vid from '../../Component/Video/video.mp4';
+// import vid from '../../Component/Video/video.mp4';
+import {useSelector} from 'react-redux';
 
 import './Library.css';
 import { MdOutlineWatchLater } from 'react-icons/md';
 import { AiOutlineLike } from 'react-icons/ai';
 function Library() {
-  const vids=[{
-    _id:1,
-    video_src:vid,
-    chanel:"adfdk",
-    Uploder:"abc",
-    description:"description of video 1"
-  },
-  {
-    _id:2,
-    video_src:vid,
-    chanel:"adfdk",
-    title:"video 2",
-    Uploder:"abc",
+  const CurrentUser=useSelector(state=>state?.currentUserReducer);
 
-    description:"description of video 2"
-  },
-  {
-    _id:3,
-    video_src:vid,
-    chanel:"adfdk",
-    title:"video 3",
-    Uploder:"abc",
+  const watchLaterList = useSelector(state=>state.watchLaterReducer);
+  const historyList = useSelector(state=>state.HistoryReducer)
+  const likedVideoList = useSelector(state=>state.likedVideoReducer)
+//   const vids=[{
+//     _id:1,
+//     video_src:vid,
+//     chanel:"adfdk",
+//     Uploder:"abc",
+//     description:"description of video 1"
+//   },
+//   {
+//     _id:2,
+//     video_src:vid,
+//     chanel:"adfdk",
+//     title:"video 2",
+//     Uploder:"abc",
 
-    description:"description of video 3"
-  },
-  {
-    _id:4,
-    video_src:vid,
-    chanel:"adfdk",
-    title:"video 4",
-    Uploder:"abc",
+//     description:"description of video 2"
+//   },
+//   {
+//     _id:3,
+//     video_src:vid,
+//     chanel:"adfdk",
+//     title:"video 3",
+//     Uploder:"abc",
 
-    description:"description of video 4"
-  },
-]
+//     description:"description of video 3"
+//   },
+//   {
+//     _id:4,
+//     video_src:vid,
+//     chanel:"adfdk",
+//     title:"video 4",
+//     Uploder:"abc",
+
+//     description:"description of video 4"
+//   },
+// ]
   return (
     <div className='container_Pages_App'>
         <LeftSidebar/>
@@ -56,7 +62,10 @@ function Library() {
               </h1>
               <div className='container_videoList_LibraryPage'>
                 <WHLVideoList
-                page={"History"} videoList={vids}/>
+                page={"History"} 
+                CurrentUser={CurrentUser?.result._id}
+                videoList={historyList}
+                />
               </div>
             </div>
             <div className="container_libraryPage">
@@ -68,7 +77,9 @@ function Library() {
               </h1>
               <div className='container_videoList_LibraryPage'>
                 <WHLVideoList
-                page={"WatchLater"} videoList={vids}/>
+                page={"WatchLater"}
+                CurrentUser={CurrentUser?.result._id}
+                 videoList={watchLaterList}/>
               </div>
             </div>
             <div className="container_libraryPage">
@@ -80,7 +91,9 @@ function Library() {
               </h1>
               <div className='container_videoList_LibraryPage'>
                 <WHLVideoList
-                page={"LikedVideo"} videoList={vids}/>
+                page={"LikedVideo"}
+                CurrentUser={CurrentUser?.result._id}
+                 videoList={likedVideoList}/>
               </div>
             </div>
         </div>
