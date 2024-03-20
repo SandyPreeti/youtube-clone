@@ -33,7 +33,7 @@ export const getAllComment=()=>async(dispatch)=>{
        }
 };
 
-export const deleteComment=(id)=>async(dispatch)=>{
+export const deleteComment = (id)=>async(dispatch)=>{
     try {
         await api.deleteComment(id);
         dispatch(getAllComment())
@@ -41,4 +41,4 @@ export const deleteComment=(id)=>async(dispatch)=>{
         console.log(error)
     }
 
-}
+};

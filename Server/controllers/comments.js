@@ -27,11 +27,11 @@ export const getAllComment=async (req,res)=>{
 
 export const deleteComment=async(req,res)=>{
     const{id:_id} =req.params;
-    if(!mongoose.Types.ObjectId.isValid(_id)){
+   if(!mongoose.Types.ObjectId.isValid(_id)){
         return res.status(404).send("Comment Unavailable...")
-    }
+    } 
 try{
-        await comment.findByIdAndRemove(_id)
+        await comment.findByIdAndDelete(_id)
          
         res.status(200).json({message:"deleted Comments"})
     } catch (error) {
