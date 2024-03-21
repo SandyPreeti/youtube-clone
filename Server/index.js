@@ -28,7 +28,7 @@ app.use('/video',videoRoutes)
 app.use('/comment',commentsRoutes)
 
 
-const PORT= process.env.Port;
+const PORT= process.env.PORT;
 const DB_URL=process.env.CONNECTION_URL
 app.listen(PORT,()=>{
     console.log(`Server is runningon the PORT ${PORT}`)
