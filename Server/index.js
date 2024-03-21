@@ -28,8 +28,8 @@ app.use('/video',videoRoutes)
 app.use('/comment',commentsRoutes)
 
 
-const PORT= 5500;
-const DB_URL="mongodb+srv://preetipatidar865:SandyP02@cluster0.x8vh0zk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const PORT= process.env.Port;
+const DB_URL=process.env.CONNECTION_URL
 app.listen(PORT,()=>{
     console.log(`Server is runningon the PORT ${PORT}`)
 })
